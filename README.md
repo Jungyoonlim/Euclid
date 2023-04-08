@@ -10,23 +10,23 @@ Euclid is an interactive educational platform designed to help students learn ma
 ## Project Structure 
 
 Euclid/
-|
+│
 ├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── schemas.py
-│   └── utils.py
+│ ├── init.py
+│ ├── main.py
+│ ├── schemas.py
+│ └── utils.py
 │
 ├── templates/
-│   ├── base.html
-│   ├── index.html
-│   └── topic.html
+│ ├── base.html
+│ ├── index.html
+│ └── topic.html
 │
 ├── static/
-│   ├── css/
-│   │   └── main.css
-│   └── js/
-│       └── main.js
+│ ├── css/
+│ │ └── main.css
+│ └── js/
+│ └── main.js
 │
 ├── requirements.txt
 └── README.md
