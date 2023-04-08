@@ -1,2 +1,2 @@
-# Euclid-
+# Euclid
 AI Math Tutor 
