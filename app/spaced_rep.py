@@ -75,6 +75,8 @@ class Flashcard:
     def __init__(self, user_id):
         self.user_id = user_id
         self.questions: List[dict]=[]
+        self.points = 0
+        self.badges = []
 
     def add_question(self, question: str, answer: str) -> None: 
         """
@@ -112,6 +114,27 @@ class Flashcard:
         question["last_asked"] = datetime.now()
         question["repetitions"] += 1
         return question_text
+    
+    #Award points based on the correctness of answers and update the user's points
+    def update_points(self, correct: bool) -> None: 
+        if correct:
+            self.points += 1
+        else:
+            self.points -= 1
+        self.points = max(0, self.points)
+    
+    #Award badges based on the correctness of answers and update the user's badges
+    def update_badges(self) -> None:
+        badge_list = [
+            {'name': 'Beginner', 'threshold': 100},
+            {'name': 'Intermediate', 'threshold': 500},
+            {'name': 'Advanced', 'threshold': 1000},
+            {'name': 'Expert', 'threshold': 2000},
+            {'name': 'Master', 'threshold': 5000},
+        ]
+        for badge in badge_list:
+            if self.points >= badge['threshold'] and badge['name'] not in self.badges:
+                self.badges.append(badge['name'])
 
     def answer_question(self, question_text: str, correct: bool) -> Optional[str]:
         """
@@ -145,4 +168,15 @@ class Flashcard:
             question["interval"] = 1
 
         question["next_review"] = datetime.now() + timedelta(days=question["interval"])
+
+        self.update_points(correct)
+        self.update_badges()
+
         return question["answer"]
+
+    leaderboard = {}
+    def get_leaderboard(user_id:str, points: int) -> None:
+        """
+        Get the leaderboard for the user.
+        """
+      
