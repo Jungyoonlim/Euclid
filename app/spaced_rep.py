@@ -4,6 +4,7 @@ from typing import List, Optional
 from langchain.llms import openai as llms_openai
 from langchain.schema import Object, Text
 from langchain import create_extraction_chain  
+from typing import Dict, List, Optional 
 
 logging.basicConfig(level=logging.INFO)
 
@@ -173,15 +174,27 @@ class Flashcard:
 
         return question["answer"]
 
-leaderboard = {}
-
-def update_leaderboard(user_id:str, points: int) -> None:
+class Leaderboard:
     """
-    Update the leaderboard for the user.
+    A leaderboard class manages the leaderboard for the app.
     """
-    leaderboard[user_id] = points
-    sorted_leaderboard = sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
-    leaderboard.clear()
-    leaderboard.update(sorted_leaderboard)
+    def __init__(self):
+        self.leaderboard = {}
 
+    def update_leaderboard(self, user_id: str, points: int) -> None:
+        """
+        Update the leaderboard for the user.
+        """
+        self.leaderboard[user_id] = points
+        sorted_leaderboard = sorted(self.leaderboard.items(), key=lambda x: x[1], reverse=True)
+        self.leaderboard.clear()
+        self.leaderboard.update(sorted_leaderboard)
+    
+    def get_leaderboard(self) -> Dict[str, int]:
+        """
+        Get the leaderboard.
+
+        return: The leaderboard dictionary 
+        """
+        return self.leaderboard
       
