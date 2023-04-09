@@ -174,13 +174,20 @@ class Flashcard:
 
         return question["answer"]
 
+<<<<<<< HEAD
 class Leaderboard:
+=======
+leaderboard = {}
+
+def update_leaderboard(user_id:str, points: int) -> None:
+>>>>>>> origin/new-feature-branch
     """
     A leaderboard class manages the leaderboard for the app.
     """
     def __init__(self):
         self.leaderboard = {}
 
+<<<<<<< HEAD
     def update_leaderboard(self, user_id: str, points: int) -> None:
         """
         Update the leaderboard for the user.
@@ -197,4 +204,6 @@ class Leaderboard:
         return: The leaderboard dictionary 
         """
         return self.leaderboard
+=======
+>>>>>>> origin/new-feature-branch
       
