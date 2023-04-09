@@ -5,7 +5,6 @@ from langchain.llms import openai as llms_openai
 from langchain.schema import Object, Text
 from langchain import create_extraction_chain  
 
-#Congifure logging
 logging.basicConfig(level=logging.INFO)
 
 llm = llms_openai.ChatOpenAI(
@@ -174,9 +173,15 @@ class Flashcard:
 
         return question["answer"]
 
-    leaderboard = {}
-    def get_leaderboard(user_id:str, points: int) -> None:
-        """
-        Get the leaderboard for the user.
-        """
+leaderboard = {}
+
+def update_leaderboard(user_id:str, points: int) -> None:
+    """
+    Update the leaderboard for the user.
+    """
+    leaderboard[user_id] = points
+    sorted_leaderboard = sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
+    leaderboard.clear()
+    leaderboard.update(sorted_leaderboard)
+
       
